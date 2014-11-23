@@ -7,11 +7,11 @@ var	express = require('express'),
 	stsettings = require('./stsettings');
 	
 // serve static content
-app.use(lessMiddleware({
-	src: __dirname + 'public/less',
-	dest: __dirname + 'public/css',
-	prefix: '/css',
-}));
+app.use(lessMiddleware(__dirname + 'public/less',
+	{ dest: __dirname + 'public/css' }, // options
+    {}, // parser
+    { compress: 'auto' } // complier
+));
 app.use(express.static(__dirname + '/public'));
 
 // server up main page
@@ -35,7 +35,7 @@ var settings = JSON.parse(JSON.stringify(stsettings)); //console.log(settings);
 var prices = JSON.parse(JSON.stringify(settings.pricesdefault)); //console.log(prices);
 
 // creating a new websocket to keep the content updated without any AJAX request
-socket.sockets.on('connection',function(socket){ console.log(socket);
+socket.sockets.on('connection',function(socket){ // console.log(socket);
 	socket.emit('settings',settings);
 	socket.emit('pricesupdate',prices);
 });
