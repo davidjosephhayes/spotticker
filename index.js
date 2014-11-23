@@ -7,12 +7,11 @@ var	express = require('express'),
 	stsettings = require('./stsettings');
 	
 // serve static content
-app.use(lessMiddleware(__dirname + 'public/less',{ 
-		dest: __dirname + 'public/css' 
-	}, // options
-    {}, // parser
-    { compress: 'auto' } // complier
-));
+app.use(lessMiddleware({
+	src: __dirname + 'public/less',
+	dest: __dirname + 'public/css',
+	prefix: '/css',
+}));
 app.use(express.static(__dirname + '/public'));
 
 // server up main page

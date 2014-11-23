@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<title>Spot Prices</title>
+<<<<<<< HEAD
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+		<style rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+		<div class="loading-container">
+			<i class="loading-icon fa fa-spinner fa-spin fa-4x"></i>
+		</div>
+		<div class="loaded-container container-fluid">
+			Loaded!
+		</div>
+=======
+		<link rel="stylesheet" href="assets/bootstrap-3.3.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/bootstrap-3.3.1/js/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="assets/font-awesome-4.2.0/css/font-awesome.min.css">
+    </head>
+    <body>
+		<div style="background: #2c3e50;" class="row">
+		<div class="col-xs-11">
+			<img style="padding: 20px;" class="img-responsive" src="http://kearneycoincenter.com/templates/as002021/images/companylogo.png" />
+		</div>
+	</div>
+	<div class="row">
+		<div style="height:5px; background-color: #27ae60;" class="col-xs-12";>
+		</div>
+	</div>
+        <div style="background: #f1c40f" class="row">
+			<div class="row">
+				<div style="padding: 20px;" class="col-xs-11 col-xs-offset-1">
+					<h1><i class="fa fa-line-chart"></i> Spot Prices</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4 col-xs-offset-1">
+					<div style="background: #2c3e50;" class="thumbnail">
+						<h1 style="color: white;"><i class="fa fa-empire"></i> Gold</h1>
+						<p style="color: white;" >cho Park Wes Anderson bespoke, DIY Austin mlkshk letterpress tilde sustainable chia High Life pork belly chillwave kale chips church-key. Art party polaroid butcher, disrupt retro church-key mlkshk actually Wes Anderson scenester gentrify.</p>
+					</div>
+					<div style="background: #2c3e50;" class="thumbnail">
+						<h1 style="color: white;"><i class="fa fa-empire"></i> Platinum</h1>
+						<p style="color: white;" >Echo Park Wes Anderson bespoke, DIY Austin mlkshk letterpress tilde sustainable chia High Life pork belly chillwave kale chips church-key. Art party polaroid butcher, disrupt retro church-key mlkshk actually Wes Anderson scenester gentrify.</p>
+					
+					</div>
+				</div>
+				<div class="col-xs-4">
+					<div style="background: #2c3e50;" class="thumbnail">
+						<h1 style="color: white;" ><i class="fa fa-empire"></i> Silver</h1>
+						<p style="color: white;" >Echo Park Wes Anderson bespoke, DIY Austin mlkshk letterpress tilde sustainable chia High Life pork belly chillwave kale chips church-key. Art party polaroid butcher, disrupt retro church-key mlkshk actually Wes Anderson scenester gentrify.</p>
+					
+					</div>
+					<div style="background: #2c3e50;" class="thumbnail">
+						<h1 style="color: white;"><i class="fa fa-empire"></i> Palladium</h1>
+						<p style="color: white;" >Echo Park Wes Anderson bespoke, DIY Austin mlkshk letterpress tilde sustainable chia High Life pork belly chillwave kale chips church-key. Art party polaroid butcher, disrupt retro church-key mlkshk actually Wes Anderson scenester gentrify. </p>
+					
+					</div>
+				</div>
+			</div>
+        </div>
+        	<div class="row">
+		<div style="height:5px; background-color: #27ae60;" class="col-xs-12";>
+		</div>
+	</div>
+        <div style="background: #e74c3c;" class="row">
+			<div style="padding-top: 10px;width:50px;" class="col-xs-1 col-xs-offset-1">
+				<img style="height: 40px;" src="http://www.raspberrypi.org/wp-content/uploads/2012/03/Raspi_Colour_R.png" alt="Raspberry Pi Logo" />
+			</div>
+			<div class="col-xs-10">
+				<h3 style="color: white;" >2014 Powered by a Raspberry Pi. For more information, visit <a href="http://www.raspberrypi.org/">http://www.raspberrypi.org/</a></h3>
+			</div>
+		</div>
+		<div style="background: #2980b9;" class="row">
+			<div style="height:50px;" class="col-xs-11 col-xs-offset-1">
+				<h3 style="color: white;" ></h3>
+			</div>
+		</div>
+
+		<div id="container">Try to change your xml data to update this content</div>
+>>>>>>> cd758b1ce374a4a8b7e59ade8778e2b4ad1a12a1
+		<script src="socket.io/socket.io.js"></script>
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script>
+			var socket = io.connect('http://localhost');
+			
+			var settings;
+			socket.on('settings',function(data){
+				settings = data;
+			});
+			
+			var prices;
+			socket.on('pricesupdate',function(data){
+				if (typeof settings == 'settings') return;
+				prices = data;
+				updateView();
+			});
+			
+			function updateView(){
+				console.log(settings);
+				console.log(prices);
+				$('#container .loading-icon').hide();
+				$('#container .loading-container').show();
+			}
+		</script>
+    </body>
+</html>
