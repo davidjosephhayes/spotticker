@@ -12,6 +12,10 @@ sudo dpkg -i node_latest_armhf.deb
 
 npm install socket.io
 
+//Install Node-Xpat: NodeJS binding for crazy fast XML parsing.
+https://github.com/node-xmpp/node-expat
+
+
 //Automatically turn on node.js on boot
 
 Last Modified 11/22/2014

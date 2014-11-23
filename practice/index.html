@@ -1,18 +1,73 @@
 <!doctype html>
 <html>
   <head>
-    <title>Socket.IO chat</title>
-    <h1>Chat Practice</h1>
-    <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width:$
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; pa$
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
-    </style>
+    <title>Kearney Coin Center Spot Prices</title>
+			<link href="kccstyles.css" rel="stylesheet" />
+		<!-- Font Awesome and Bootstrap -->
+        <!-- Font Awesome -->
+			<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+        <!-- Latest compiled and minified CSS -->
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+        <!-- Optional theme -->
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<div>
+			<img src="Images/companylogo.png" />
+		</div>
+        <div class="row">
+			<div class="col-xs-12">
+			<h1><i class="fa fa-line-chart"></i> Spot Prices</h1>
+			</div>
+        </div>
+        <div class="row">
+        <div class="col-xs-6">
+			<h1><i class="fa fa-empire"></i> Gold</h1>
+			<h1><i class="fa fa-empire"></i> Platinum</h1>
+        </div>
+        <div class="col-xs-6">
+			<h1><i class="fa fa-empire"></i> Silver</h1>
+			<h1><i class="fa fa-empire"></i> Palladium</h1>
+        </div>
+        </div>
+        <style>
+    body {
+		padding: 20px 50px;
+		font: 13px Helvetica, Arial; 
+		
+	form { 
+		background: #; 
+		padding: 3px; 
+		position: fixed; 
+		bottom: 0; 
+		width: 100%; 
+		}
+	form input { 
+		border: 0; 
+		padding: 10px; 
+		width: 90%; 
+		margin-right: .5%; 
+	}
+	form button { 
+		width: 9%; 
+		background: rgb(130, 224, 255); 
+		border: none; 
+		padding: 10px; 
+	}
+	#messages { 
+		list-style-type: none; 
+		margin: 0;
+		padding: 0; 
+	}
+	#messages li { 
+		padding: 5px 10px; 
+	}
+	#messages li:nth-child(odd) { 
+		background: #eee; 
+	}
+
+</style>
   </head>
         <script src="/socket.io/socket.io.js">
         </script>
@@ -26,8 +81,4 @@
     </form>
   </body>
 </html>
-
-
-
-
 
