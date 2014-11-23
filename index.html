@@ -2,21 +2,43 @@
 <html lang="en">
     <head>
 		<title>Spot Prices</title>
-		<link rel="stylesheet" href="assets/bootstrap-3.3.1/css/bootstrap.min.css">
-		<link rel="stylesheet" href="assets/bootstrap-3.3.1/js/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+		<style rel="stylesheet" href="">
     </head>
     <body>
-		<div id="container">Try to change your xml data to update this content</div>
+		<div id="container" class="container-fluid text-center">
+			<div class="loading-container">
+				<i class="loading-icon fa fa-spinner fa-spin fa-4x"></i>
+			</div>
+			<div class="loaded-container">
+			</div>
+		</div>
 		<script src="socket.io/socket.io.js"></script>
-		<script src="assets/jquery-1.11.1.min.js"></script>
-		<script src="assets/bootstrap-3.3.1/js/bootstrap.min.js"></script>
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script>
 			var socket = io.connect('http://localhost');
-			socket.on('prices',function(data){
-				// convert the json string into a valid javascript object
-				var _data = JSON.parse(data);
-				$('#container').html(data);
+			
+			var settings;
+			socket.on('settings',function(data){
+				settings = data;
 			});
+			
+			var prices;
+			socket.on('pricesupdate',function(data){
+				if (typeof settings == 'settings') return;
+				prices = data;
+				updateView();
+			});
+			
+			function updateView(){
+				console.log(settings);
+				console.log(prices);
+				$('#container .loading-icon').hide();
+				$('#container .loading-container').show();
+			}
 		</script>
     </body>
 </html>
