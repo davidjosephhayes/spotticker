@@ -2,6 +2,8 @@
 // ========
 module.exports = {
 	
+	testmode: true,
+	
 	pricesupdateinterval: 60, // in minutes
 	
 	todisplay: ['g','toz','dwt'], // weights to diplay g,toz,dwt
