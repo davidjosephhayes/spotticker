@@ -8,7 +8,6 @@ var	express = require('express'),
 	stsettings = require('./stsettings');
 	
 // serve static content
-console.log(path.join(__dirname, 'source', 'less'));
 app.use(less(path.join(__dirname, 'source', 'less'), {
   dest: path.join(__dirname, 'public')
 }));
@@ -39,24 +38,35 @@ socket.sockets.on('connection',function(socket){ // console.log(socket);
 updateinterval();
 var updateintervalintv = setInterval(updateinterval,settings.pricesupdateinterval * 1000 * 60);
 function updateinterval() {
-	request.get('http://www.xmlcharts.com/cache/precious-metals.php?format=json&currency=usd', function(error,response,body){
-		if (error || response.statusCode != 200) return false;
-		try {
-			var newprices = JSON.parse(response.body);
-			
-			prices.updated = new Date();
-			
-			//~ for (var i=0; i<settings.todisplay.length; i++) {
-				//~ var obj = prices.prices[settings.todisplay[i]];
-				//~ for (var j in obj) {
-					//~ if (!obj.hasOwnProperty(j)) continue;
-					//~ obj[j] = newprices[j]*stsettings.gconvert[i];
-				//~ }
-			//~ }
-			
-			socket.emit('pricesupdate',prices);
-			
-		} catch(e) { console.log(e); }
-	});
+	
+	if (settings.testmode) {
+		var newprices = {
+			"gold": 38.74486 * (0.75 + Math.random()*0.5),
+			"palladium": 25.33479 * (0.75 + Math.random()*0.5),
+			"platinum": 39.54541 * (0.75 + Math.random()*0.5),
+			"silver": 0.53113 * (0.75 + Math.random()*0.5),
+		};
+		updateprices(newprices);
+	} else {
+		request.get('http://www.xmlcharts.com/cache/precious-metals.php?format=json&currency=usd', function(error,response,body){
+			if (error || response.statusCode != 200) return false;
+			try {
+				var newprices = JSON.parse(response.body);
+				updateprices(newprices);						
+			} catch(e) { console.log(e); }
+		});
+	}
+	
+	function updateprices(newprices) {
+		prices.updated = new Date();
+		for (var i=0; i<settings.todisplay.length; i++) {
+			var meas = settings.todisplay[i];
+			var obj = prices[meas];
+			for (var j in obj) {
+				if (!obj.hasOwnProperty(j)) continue;
+				obj[j] = newprices[j]*settings.gconvert[meas]; 
+			}
+		}
+		socket.emit('pricesupdate',prices);
+	}
 }
-
