@@ -4,12 +4,28 @@ var	express = require('express'),
 	fs = require('fs'),
 	request = require('request'),
 	path = require('path'),
-	less = require('less-middleware'),
+	//~ less = require('less-middleware'),
 	stsettings = require('./stsettings');
 	
+// setup basics
+var settings = JSON.parse(JSON.stringify(stsettings)); //console.log(settings);
+var prices = JSON.parse(JSON.stringify(settings.pricesdefault)); // console.log(prices);
+	
 // serve static content
-app.use(less(path.join(__dirname, 'source', 'less'), {
-  dest: path.join(__dirname, 'public')
+app.use(require('less-middleware')(path.join(__dirname, 'source', 'less'), {
+	dest: path.join(__dirname, 'public'),
+	options: {
+		compiler: {
+			compress: !settings.testmode,
+		},
+	},
+	preprocess: {
+		path: function(pathname, req) {
+			return pathname.replace('/css/', '/');
+		},
+	},
+	debug: settings.testmode,
+	force: settings.testmode,
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -24,11 +40,7 @@ app.get('/',function(req,res){
 var server = app.listen(1337);
 var socket = io.listen(server);
 
-// setup basics
-var settings = JSON.parse(JSON.stringify(stsettings)); //console.log(settings);
-var prices = JSON.parse(JSON.stringify(settings.pricesdefault)); // console.log(prices);
-
-// creating a new websocket to keep the content updated without any AJAX request
+// creating a new websocket
 socket.sockets.on('connection',function(socket){ // console.log(socket);
 	socket.emit('settings',settings);
 	socket.emit('pricesupdate',prices);
