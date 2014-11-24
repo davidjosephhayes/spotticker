@@ -3,12 +3,13 @@ var	express = require('express'),
 	io = require('socket.io'),
 	fs = require('fs'),
 	request = require('request'),
-	lessMiddleware = require('less-middleware'),
+	less = require('less-middleware'),
 	stsettings = require('./stsettings');
 	
 // serve static content
-app.use(lessMiddleware(__dirname + 'public/less',
-	{ dest: __dirname + 'public/css' }, // options
+console.log(__dirname + '/public/less');
+app.use(less(__dirname + '/public/less',
+	{ dest: __dirname + '/public/css' }, // options
     {}, // parser
     { compress: 'auto' } // complier
 ));

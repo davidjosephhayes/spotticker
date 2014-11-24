@@ -12,7 +12,9 @@
 			<i class="loading-icon fa fa-spinner fa-spin fa-4x"></i>
 		</div>
 		<div class="loaded-container container-fluid">
+			<!-- adrian start -->
 			<h1>Loaded price data</h1>
+			<!-- adrian end -->
 		</div>
 		<script src="socket.io/socket.io.js"></script>
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -35,6 +37,10 @@
 			function updateView(){
 				console.log(settings);
 				console.log(prices);
+				// adrian start
+				
+				
+				// adrian end
 				$('#container .loading-icon').hide();
 				$('#container .loading-container').show();
 			}
