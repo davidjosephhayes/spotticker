@@ -4,7 +4,7 @@ var	express = require('express'),
 	fs = require('fs'),
 	request = require('request'),
 	path = require('path'),
-	//~ less = require('less-middleware'),
+	less = require('less-middleware'),
 	stsettings = require('./stsettings');
 	
 // setup basics
@@ -12,7 +12,7 @@ var settings = JSON.parse(JSON.stringify(stsettings)); //console.log(settings);
 var prices = JSON.parse(JSON.stringify(settings.pricesdefault)); // console.log(prices);
 	
 // serve static content
-app.use(require('less-middleware')(path.join(__dirname, 'source', 'less'), {
+app.use(less(path.join(__dirname, 'source', 'less'), {
 	dest: path.join(__dirname, 'public'),
 	options: {
 		compiler: {

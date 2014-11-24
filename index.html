@@ -22,7 +22,7 @@
 								<h1>Gold</h1>
 							</div>
 							<div class="col-xs-6">
-								<h1>Grams</h1>
+								<h1 class="currentWeight"></h1>
 							</div>
 						</div>
 					</div>
@@ -37,7 +37,7 @@
 								<h1>Silver</h1>
 							</div>
 							<div class="col-xs-6">
-								<h1>Grams</h1>
+								<h1 class="currentWeight"></h1>
 							</div>
 						</div>
 					</div>
@@ -55,7 +55,7 @@
 								<h1>Platinum</h1>
 							</div>
 							<div class="col-xs-6">
-								<h1>Grams</h1>
+								<h1 class="currentWeight"></h1>
 							</div>
 						</div>
 					</div>
@@ -71,7 +71,7 @@
 								<h1>Palladium</h1>
 							</div>
 							<div class="col-xs-6">
-								<h1>Grams</h1>
+								<h1 class="currentWeight"></h1>
 							</div>
 						</div>
 					</div>
@@ -93,28 +93,41 @@
 			var settings;
 			socket.on('settings',function(data){
 				settings = data;
+				if (settings.todisplay.length<=0) settings.todisplay = ['g'];
+				setupUpdate();
 			});
 			
 			var prices;
 			socket.on('pricesupdate',function(data){
-				if (typeof settings == 'undefined') return;
 				prices = data;
-				updateView();
+				setupUpdate();
 			});
 			
+			var updateintv;
+			function setupUpdate() {
+				if (typeof updateintv != 'undefined' || typeof settings == 'undefined' || typeof prices == 'undefined') return;
+				updateintv = setInterval(function(){
+					//~ console.log(settings);
+					//~ console.log(prices);
+					updateView();
+				},settings.screenupdateinterval*1000);
+			}
+			
+			var cw = 0;
 			function updateView(){
-				console.log(settings);
-				console.log(prices);
 				// adrian start
+				var currentweight = settings.todisplay[cw];
 				
-				$('.goldPrice').html(prices.g.gold);
-				$('.silverPrice').html(prices.g.silver);
-				$('.palladiumPrice').html(prices.g.palladium);
-				$('.platinumPrice').html(prices.g.platinum);
+				$('.currentWeight').text(currentweight);
+				$('.goldPrice').html(prices[currentweight].gold);
+				$('.silverPrice').html(prices[currentweight].silver);
+				$('.palladiumPrice').html(prices[currentweight].palladium);
+				$('.platinumPrice').html(prices[currentweight].platinum);
 				
+				cw = (cw+1)%settings.todisplay.length;
+				
+				$('.loading-container').hide();
 				// adrian end
-				$('#container .loading-icon').hide();
-				$('#container .loading-container').show();
 			}
 		</script>
     </body>
