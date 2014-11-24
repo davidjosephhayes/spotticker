@@ -1,7 +1,6 @@
 var	express = require('express'),
 	app = express(),
 	io = require('socket.io'),
-	fs = require('fs'),
 	request = require('request'),
 	path = require('path'),
 	less = require('less-middleware'),
@@ -31,9 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // server up main page
 app.get('/',function(req,res){
-	fs.readFile(__dirname + '/index.html',function(err,data){
-		res.sendFile(__dirname + '/index.html');
-	});
+	res.sendFile(__dirname + '/index.html');
 });
 
 // setup server

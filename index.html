@@ -13,80 +13,30 @@
 		</div>
 		<div class="loaded-container container-fluid">
 			<!-- adrian start -->
-			
 			<div class="row">
 				<div id="topLeft" class="col-xs-6">
-					<div>
-						<div class="row">
-							<div class="col-xs-6">
-								<h1>Gold</h1>
-							</div>
-							<div class="col-xs-6">
-								<h3>Grams</h3>
-							</div>
-						</div>
-					</div>
-					<div>
-						<h2 class="goldPrice text-center"></h2>
-					</div>
+					<h1>Gold</h1>
+					<h2 class="goldPrice text-center"></h2>
 				</div>
 				<div id="topRight" class="col-xs-6">
-					<div>
-						<div class="row">
-							<div class="col-xs-6">
-								<h1>Silver</h1>
-							</div>
-							<div class="col-xs-6">
-								<h3>Grams</h3>
-							</div>
-						</div>
-					</div>
-					<div>
-						<h2 class="silverPrice text-center"></h2>	
-					</div>
+					<h1>Silver</h1>
+					<h2 class="silverPrice text-center"></h2>	
 				</div>
 			</div>
-			
 			<div class="row">
 				<div id="bottomLeft" class="col-xs-6">
-					<div>
-						<div class="row">
-							<div class="col-xs-6">
-								<h1>Platinum</h1>
-							</div>
-						</div>
-						
-					</div>
-						<div class="row">
-							<h2 class="platinumPrice text-center"></h2>
-						</div>
-						<div class="row">
-							<div class="col-xs-6">
-								<h3>Grams</h3>
-							</div>
-						</div>
+					<h1>Platinum</h1>
+					<h2 class="platinumPrice text-center"></h2>
 				</div>
 				<div id="bottomRight" class="col-xs-6">
-					<div>
-						<div class="row">
-							<div class="col-xs-6">
-								<h1>Palladium</h1>
-							</div>
-							<div class="col-xs-6 text-right">
-								<h3>G</h3>
-							</div>
-						</div>
-					</div>
-					<div>
-						<h2 class="palladiumPrice text-center">	
-						</h2>
-					</div>
-					<div>
-					<p class="lastUpdated text-right"></p>
-					</div>
+					<h1>Palladium</h1>
+					<h2 class="palladiumPrice text-center"></h2>
 				</div>
 			</div>
-
+			<div class="row">
+				<div class="col-xs-6 currentWeight"></div>
+				<div class="col-xs-6 text-right lastUpdated"></div>
+			</div>
 			<!-- adrian end -->
 		</div>
 		<script src="socket.io/socket.io.js"></script>
@@ -98,40 +48,51 @@
 			var settings;
 			socket.on('settings',function(data){
 				settings = data;
+				if (settings.todisplay.length<=0) settings.todisplay = ['g'];
+				setupUpdate();
 			});
 			
 			var prices;
 			socket.on('pricesupdate',function(data){
-				if (typeof settings == 'undefined') return;
 				prices = data;
-				updateView();
+				setupUpdate();
 			});
 			
+			var updateintv;
+			function setupUpdate() {
+				if (typeof updateintv != 'undefined' || typeof settings == 'undefined' || typeof prices == 'undefined') return;
+				updateintv = setInterval(function(){
+					//~ console.log(settings);
+					//~ console.log(prices);
+					updateView();
+				},settings.screenupdateinterval*1000);
+			}
+			
+			var cw = 0;
 			function updateView(){
-				console.log(settings);
-				console.log(prices);
 				// adrian start
+				var currentweight = settings.todisplay[cw];
 				
-				$('.goldPrice').html(prices.g.gold);
-				$('.silverPrice').html(prices.g.silver);
-				$('.palladiumPrice').html(prices.g.palladium);
-				$('.platinumPrice').html(prices.g.platinum);
+				$('.currentWeight').text(currentweight);
+				$('.goldPrice').html('$'+prices[currentweight].gold.toFixed(2));
+				$('.silverPrice').html('$'+prices[currentweight].silver.toFixed(2));
+				$('.palladiumPrice').html('$'+prices[currentweight].palladium.toFixed(2));
+				$('.platinumPrice').html('$'+prices[currentweight].platinum.toFixed(2));
+				
+				cw = (cw+1)%settings.todisplay.length;
 				
 				var u = new Date(prices.updated);
-				
 				var hours = u.getHours();
-				var minutes = u.getMinutes(); 
 				var am = hours%12==hours ? 'am' : 'pm';
+				hours = hours==0 ? 12 : hours;
+				var minutes = u.getMinutes(); 
 				var day = u.getDate();
 				var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
 				var month = monthNames[u.getMonth()].substr(0,3);
-				
 				$('.lastUpdated').html(hours + ':' + minutes + ' ' + am + ' - ' + day + ' ' + month);
 				
-					
+				$('.loading-container').hide();
 				// adrian end
-				$('#container .loading-icon').hide();
-				$('#container .loading-container').show();
 			}
 		</script>
     </body>
