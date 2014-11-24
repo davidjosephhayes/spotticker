@@ -15,14 +15,14 @@
 			<!-- adrian start -->
 			
 			<div class="row">
-				<div class="col-xs-6">
+				<div id="topLeft" class="col-xs-6">
 					<div>
 						<div class="row">
 							<div class="col-xs-6">
 								<h1>Gold</h1>
 							</div>
 							<div class="col-xs-6">
-								<h1>Grams</h1>
+								<h3>Grams</h3>
 							</div>
 						</div>
 					</div>
@@ -30,14 +30,14 @@
 						<h2 class="goldPrice text-center"></h2>
 					</div>
 				</div>
-				<div class="col-xs-6">
+				<div id="topRight" class="col-xs-6">
 					<div>
 						<div class="row">
 							<div class="col-xs-6">
 								<h1>Silver</h1>
 							</div>
 							<div class="col-xs-6">
-								<h1>Grams</h1>
+								<h3>Grams</h3>
 							</div>
 						</div>
 					</div>
@@ -48,36 +48,41 @@
 			</div>
 			
 			<div class="row">
-				<div class="col-xs-6">
+				<div id="bottomLeft" class="col-xs-6">
 					<div>
 						<div class="row">
 							<div class="col-xs-6">
 								<h1>Platinum</h1>
 							</div>
+						</div>
+						
+					</div>
+						<div class="row">
+							<h2 class="platinumPrice text-center"></h2>
+						</div>
+						<div class="row">
 							<div class="col-xs-6">
-								<h1>Grams</h1>
+								<h3>Grams</h3>
 							</div>
 						</div>
-					</div>
-						<div>
-							<h2 class="platinumPrice text-center">
-						</div>
-					</h2>
 				</div>
-				<div class="col-xs-6">
+				<div id="bottomRight" class="col-xs-6">
 					<div>
 						<div class="row">
 							<div class="col-xs-6">
 								<h1>Palladium</h1>
 							</div>
-							<div class="col-xs-6">
-								<h1>Grams</h1>
+							<div class="col-xs-6 text-right">
+								<h3>G</h3>
 							</div>
 						</div>
 					</div>
 					<div>
 						<h2 class="palladiumPrice text-center">	
 						</h2>
+					</div>
+					<div>
+					<p class="lastUpdated text-right"></p>
 					</div>
 				</div>
 			</div>
@@ -112,6 +117,18 @@
 				$('.palladiumPrice').html(prices.g.palladium);
 				$('.platinumPrice').html(prices.g.platinum);
 				
+				var u = new Date(prices.updated);
+				
+				var hours = u.getHours();
+				var minutes = u.getMinutes(); 
+				var am = hours%12==hours ? 'am' : 'pm';
+				var day = u.getDate();
+				var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+				var month = monthNames[u.getMonth()].substr(0,3);
+				
+				$('.lastUpdated').html(hours + ':' + minutes + ' ' + am + ' - ' + day + ' ' + month);
+				
+					
 				// adrian end
 				$('#container .loading-icon').hide();
 				$('#container .loading-container').show();
