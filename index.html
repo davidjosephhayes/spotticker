@@ -13,7 +13,75 @@
 		</div>
 		<div class="loaded-container container-fluid">
 			<!-- adrian start -->
-			<h1>Loaded price data</h1>
+			
+			<div class="row">
+				<div class="col-xs-6">
+					<div>
+						<div class="row">
+							<div class="col-xs-6">
+								<h1>Gold</h1>
+							</div>
+							<div class="col-xs-6">
+								<h1>Grams</h1>
+							</div>
+						</div>
+					</div>
+					<div>
+						<h2 class="goldPrice text-center"></h2>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div>
+						<div class="row">
+							<div class="col-xs-6">
+								<h1>Silver</h1>
+							</div>
+							<div class="col-xs-6">
+								<h1>Grams</h1>
+							</div>
+						</div>
+					</div>
+					<div>
+						<h2 class="silverPrice text-center"></h2>	
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-6">
+					<div>
+						<div class="row">
+							<div class="col-xs-6">
+								<h1>Platinum</h1>
+							</div>
+							<div class="col-xs-6">
+								<h1>Grams</h1>
+							</div>
+						</div>
+					</div>
+						<div>
+							<h2 class="platinumPrice text-center">
+						</div>
+					</h2>
+				</div>
+				<div class="col-xs-6">
+					<div>
+						<div class="row">
+							<div class="col-xs-6">
+								<h1>Palladium</h1>
+							</div>
+							<div class="col-xs-6">
+								<h1>Grams</h1>
+							</div>
+						</div>
+					</div>
+					<div>
+						<h2 class="palladiumPrice text-center">	
+						</h2>
+					</div>
+				</div>
+			</div>
+
 			<!-- adrian end -->
 		</div>
 		<script src="socket.io/socket.io.js"></script>
@@ -39,6 +107,10 @@
 				console.log(prices);
 				// adrian start
 				
+				$('.goldPrice').html(prices.g.gold);
+				$('.silverPrice').html(prices.g.silver);
+				$('.palladiumPrice').html(prices.g.palladium);
+				$('.platinumPrice').html(prices.g.platinum);
 				
 				// adrian end
 				$('#container .loading-icon').hide();
