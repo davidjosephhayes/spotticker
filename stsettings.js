@@ -15,25 +15,23 @@ module.exports = {
 	
 	pricesdefault: {
 		"updated": false,
-		"prices": {
-			"g": {
-				"gold": 0,
-				"palladium": 0,
-				"platinum": 0,
-				"silver": 0,
-			},
-			"toz": {
-				"gold": 0,
-				"palladium": 0,
-				"platinum": 0,
-				"silver": 0,
-			},
-			"dwt": {
-				"gold": 0,
-				"palladium": 0,
-				"platinum": 0,
-				"silver": 0,
-			},
+		"g": {
+			"gold": 0,
+			"palladium": 0,
+			"platinum": 0,
+			"silver": 0,
+		},
+		"toz": {
+			"gold": 0,
+			"palladium": 0,
+			"platinum": 0,
+			"silver": 0,
+		},
+		"dwt": {
+			"gold": 0,
+			"palladium": 0,
+			"platinum": 0,
+			"silver": 0,
 		},
 	},
 };

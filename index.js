@@ -3,27 +3,21 @@ var	express = require('express'),
 	io = require('socket.io'),
 	fs = require('fs'),
 	request = require('request'),
+	path = require('path'),
 	less = require('less-middleware'),
 	stsettings = require('./stsettings');
 	
 // serve static content
-console.log(__dirname + '/public/less');
-app.use(less(__dirname + '/public/less',
-	{ dest: __dirname + '/public/css' }, // options
-    {}, // parser
-    { compress: 'auto' } // complier
-));
-app.use(express.static(__dirname + '/public'));
+console.log(path.join(__dirname, 'source', 'less'));
+app.use(less(path.join(__dirname, 'source', 'less'), {
+  dest: path.join(__dirname, 'public')
+}));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // server up main page
 app.get('/',function(req,res){
 	fs.readFile(__dirname + '/index.html',function(err,data){
-		if (err) {
-			res.writeHead(500);
-			return res.end('Error loading index.html');
-		}
-		res.writeHead(200);
-		res.end(data);
+		res.sendFile(__dirname + '/index.html');
 	});
 });
 
@@ -33,7 +27,7 @@ var socket = io.listen(server);
 
 // setup basics
 var settings = JSON.parse(JSON.stringify(stsettings)); //console.log(settings);
-var prices = JSON.parse(JSON.stringify(settings.pricesdefault)); //console.log(prices);
+var prices = JSON.parse(JSON.stringify(settings.pricesdefault)); // console.log(prices);
 
 // creating a new websocket to keep the content updated without any AJAX request
 socket.sockets.on('connection',function(socket){ // console.log(socket);
@@ -52,13 +46,13 @@ function updateinterval() {
 			
 			prices.updated = new Date();
 			
-			for (var i=0; i<settings.todisplay.length; i++) {
-				var obj = prices.prices[settings.todisplay[i]];
-				for (var j in obj) {
-					if (!obj.hasOwnProperty(j)) continue;
-					obj[j] = newprices[j]*stsettings.gconvert[i];
-				}
-			}
+			//~ for (var i=0; i<settings.todisplay.length; i++) {
+				//~ var obj = prices.prices[settings.todisplay[i]];
+				//~ for (var j in obj) {
+					//~ if (!obj.hasOwnProperty(j)) continue;
+					//~ obj[j] = newprices[j]*stsettings.gconvert[i];
+				//~ }
+			//~ }
 			
 			socket.emit('pricesupdate',prices);
 			
