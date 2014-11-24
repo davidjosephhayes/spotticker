@@ -27,7 +27,7 @@
 			
 			var prices;
 			socket.on('pricesupdate',function(data){
-				if (typeof settings == 'settings') return;
+				if (typeof settings == 'undefined') return;
 				prices = data;
 				updateView();
 			});
