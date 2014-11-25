@@ -17,8 +17,8 @@
     "type": "git",
     "url": "https://github.com/davidjosephhayes/spotticker"
   },
-  "author": "David Hayes",
-  "license": "BSD-2-Clause",
+  "author": "David Hayes & Adrian Sanabria-Diaz",
+  "license": "GPLv3",
   "bugs": {
     "url": "https://github.com/davidjosephhayes/spotticker/issues"
   }
