@@ -9,8 +9,6 @@ http://www.xmlcharts.com/precious-metals.html
 
 
 Raspberry Pi Setup for each Spotticker Instance:
--Adrian Sanabria-Diaz
--David Hayes
 
 // Install your updates
 $ sudo apt-get update && sudo apt-get upgrade
