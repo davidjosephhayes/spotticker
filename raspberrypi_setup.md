@@ -23,7 +23,6 @@ $ 	sudo apt-get install unclutter
 $	touch /home/pi/index.js 
 $	su pi -c 'node /home/pi/index.js < /dev/null &'
 
-
 //	Autostart Midori and have it navigate to a specific URL
 //	First, navigate to the 'autostart' file and open it
 
