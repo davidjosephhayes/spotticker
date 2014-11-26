@@ -43,7 +43,7 @@
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script>
-			var socket = io.connect('http://localhost');
+			var socket = io.connect(window.location.protocol+'//'+window.location.hostname);
 			
 			var settings;
 			socket.on('settings',function(data){
