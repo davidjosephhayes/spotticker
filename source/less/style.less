@@ -1,8 +1,9 @@
 body {
 	background: #000;
 	color: #fff;
+	font-size: 32px;
 	h1 {
-		color: #c0392b;
+		color: #f1c40f;
 	}
 	.loading-container {
 		position: fixed;
@@ -22,7 +23,48 @@ body {
 		}
 	}
 	.loaded-container {
+	
+		#topLeft, #topRight, #bottomLeft, #bottomRight {
+			position: fixed;
+			width: 50%;
+			height: 50%;
+			z-index: 50;
+			top: 0;
+			left: 0;
+			border: solid 0.2em purple;
+		}
+	
+		#topLeft {
+			right: 50%;
+			bottom: 50%;
+			
+		}
 		
+		#topRight {
+			left: 50%;
+			bottom: 50%;
+		}
+		
+		#bottomLeft {
+			right: 50%;
+			top: 50%;
+		}
+		
+		#bottomRight {
+			left: 50%;
+			top: 50%;
+		}
+		
+		h1 {
+		font-size: 5rem;
+		}
+		
+		h2 {
+		font-size: 10rem;
+		
+		}
 		
 	}
+	
+	
 }
