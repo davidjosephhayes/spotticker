@@ -18,33 +18,43 @@ Download the latest 'spotticker' repo from https://github.com/davidjosephhayes/s
 
     $ git clone https://github.com/davidjosephhayes/spotticker
 
-Copy the contents from 'spotticker' and paste them into the home drive and then remove the 'spotticker' folder to tidy up the home folder
-    
-    $ cp /spotticker* /home/pi
-    $ rm /spotticker -rf
+Let's disable the Raspberry Pi from going to sleep. My work around is done by installing the X Window System and then updating a file that affects the environment. 
 
-Disable the Raspberry Pi from going to sleep (This currently isn't working and needs a different solution)
+    $ sudo apt-get install x11-xserver-utils install
+
+When you're done installing the X Window System on the Raspberri Pi, direct yourself to the lightdm directory:
 
     $ cd /etc/lightdm
     $ sudo nano lightdm.conf
 
-Scroll down to the 'Seat defaults' section and enable 'xserver-command = X -s 0 -dpms' by deleting the # before it after. When you're finished, click ^X, Y, and hit Enter to save your changes
+Scroll down the file and enable the line that says:
+    
+    # Seat defaults
+    #
+    #xserver-command = X -s 0 -dpms
 
-Disable the mouse from appearing on Boot by installing the program 'unclutter'
+to 
+
+    # Seat defaults
+    #
+    xserver-command = X -s 0 -dpms #Took out the comment
+
+by ommitting the '#' that comments it out.
+
+Next up, let's disable the mouse from appearing on Boot by installing the program 'unclutter'
 
     $ sudo apt-get install unclutter
 
-Autostart Node.js by navigating to the rc.locale folder and adding the following lines. Colors will change in the nano editor if done correctly.
+The 'spotticker' app depends on the Node.js. Let's have Node run at boot by having it autostart. Navigate to the /etc directory, opening 'rc.local', and adding some lines. Colors will change in the nano editor if done correctly.
 
-    $ cd /etc/rc.local
+    $ cd /etc/
     $ sudo nano rc.local
 
 Add the following lines before the 'exit 0' text
 
-    $ touch /home/pi/index.js
-    $ su pi -c 'node /home/pi/index.js < /dev/null &'
+    $ su pi -c 'node /home/pi/spotticker/index.js < /dev/null &'
 
-Autostart Midori and have it navigate to a specific URL. First, navigate to the 'autostart' file and open it:
+Now that Node.js is automatically starting up on boot, we'll need our browser to direct itself to a preconfigured page in the 'index.js' file. Let's autostart Midori and have it navigate to that specific URL. First, navigate to the 'autostart' file and open it:
 
     $ cd /etc/xdg/lxsession/LXDE
     $ sudo nano autostart
@@ -63,9 +73,11 @@ Second, comment out the first three lines, and add these other lines. When compl
 
 When you're finished, click ^X, Y, and hit Enter to save your changes
 
+<h3>Wifi Configuration</h3>
+
 The Wifi can be configured one of two ways. If you have only one network you will be using, read the the next few steps under 'Single Wifi Configuration' Otherwises, jump to 'Multiple Wifi Configuration'
- 
-Single Wifi Configuration: 
+
+<h4>Single Wifi Configuration:</h4> 
 
     $ sudo nano /etc/network interfaces
 
@@ -84,7 +96,7 @@ Change your code inside this file to read the following with your SSID and Passw
     wpa-ssid "ssid"
     wpa-psk "password"
 
-Multiple WiFi Configuration:
+<h4>Multiple WiFi Configuration:</h4>
 Setup Wifi Configuration for the Raspberry Pi like the following if you have multiple wifi networks. This will also let the Raspberry Pi connect on boot without the need for an ethernet cable
  
     $  cd /etc/wpa_supplicant/
