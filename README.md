@@ -7,30 +7,31 @@ We designed this to be used on a Raspberry Pi, so instructions for our setup of 
 
 http://www.xmlcharts.com/precious-metals.html
 
-
 Raspberry Pi Setup for each Spotticker Instance:
 
-// Install your updates
-$ sudo apt-get update && sudo apt-get upgrade
+Install your updates
+
+    $ sudo apt-get update && sudo apt-get upgrade
 
 // Download the latest 'spotticker' repo from
+
 // https://github.com/davidjosephhayes/spotticker into your home
+
 // folder (/home/pi)
-$ git clone https://github.com/davidjosephhayes/spotticker
 
-// Copy the contents from 'spotticker' and paste them into the home
-// drive and then remove the 'spotticker' folder to tidy up the home
-// folder
-$ cp /spotticker* /home/pi
-$ rm /spotticker -rf
+    $ git clone https://github.com/davidjosephhayes/spotticker
 
-// Disable the Raspberry Pi from going to sleep
-$ cd /etc/lightdm
-$ sudo nano lightdm.conf
-// Scroll down to the 'Seat defaults' section and enable
-// 'xserver-command = X -s 0 -dpms' by deleting the # before it after
-// When you're finished, click ^X, Y, and hit Enter to save your
-// changes
+// Copy the contents from 'spotticker' and paste them into the home drive and then remove the 'spotticker' folder to tidy up the home folder
+    
+    $ cp /spotticker* /home/pi
+    $ rm /spotticker -rf
+
+Disable the Raspberry Pi from going to sleep
+
+    $ cd /etc/lightdm
+    $ sudo nano lightdm.conf
+
+Scroll down to the 'Seat defaults' section and enable 'xserver-command = X -s 0 -dpms' by deleting the # before it after. When you're finished, click ^X, Y, and hit Enter to save your changes
 
 // Disable the mouse from appearing on Boot by installing the program
 // 'unclutter'
@@ -74,8 +75,8 @@ sleep 60
 
 $ sudo nano /etc/network interfaces
 // Change your code inside this file to read the following with your SSID and Password name filled in:
----------------------------------------------------------------
-    auto lo
+
+auto lo
      
     iface lo inet loopback
     iface eth0 inet dhcp
@@ -87,7 +88,6 @@ $ sudo nano /etc/network interfaces
     iface wlan0 inet dhcp
     wpa-ssid "ssid"
     wpa-psk "password"
---------------------------------------------------------------
 
 // Multiple WiFi Configuration:
 // Setup Wifi Configuration for the Raspberry Pi like the following if you have multiple wifi networks.
@@ -96,64 +96,62 @@ $ sudo nano /etc/network interfaces
 $  cd /etc/wpa_supplicant/
 $  sudo nano wpa_supplicant.conf
 // Add the id "id_str="business" (could be anything, but something you can identify easy
-// Your code will look like the following. Just add the id in there after the ssid and psk. 
-----------------------------------------------------------------
+// To have your code look like the following just add the id in there after the ssid and psk:
 
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
+    ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+    update_config=1
 
-network={
-    ssid= NETWORK NAME"
-    psk="PASSWORD"
-    id_str="test"
-}
+    network={
+        ssid= NETWORK NAME"
+        psk="PASSWORD"
+        id_str="test"
+    }
 
-network={
-    ssid="HOME NETWORK NAME"
-    psk="HOME PASSWORD"
-    id_str="home"
-}
+    network={
+        ssid="HOME NETWORK NAME"
+        psk="HOME PASSWORD"
+        id_str="home"
+    }
 
-network = {
-    ssid="BUSINESS NETWORK NAME"
-    psk="BUSINESS PASSWORD"
-    id_str="business
+    network = {
+        ssid="BUSINESS NETWORK NAME"
+        psk="BUSINESS PASSWORD"
+        id_str="business
 
-----------------------------------------------------------------	
+
 // Hit ^X to save your changes and yes, and then enter
 
 // Now navigate to /etc/network/ and sudo nano interfaces and edit
+
 // the code to make it read like the following: 
------------------------------------------------------------------
 
-auto lo
+---------------------------------------------------------------
 
-iface lo inet loopback
-iface eth0 inet dhcp
+    auto lo
 
-allow-hotplug wlan0
-iface wlan0 inet manual
-wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+    iface lo inet loopback
+    iface eth0 inet dhcp
 
-iface test inet static
-address <test address>
-gateway <business gateway>
-netmask <business netmask>
+    allow-hotplug wlan0
+    iface wlan0 inet manual
+    wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+
+    iface test inet static
+    address <test address>
+    gateway <business gateway>
+    netmask <business netmask>
 
 
-iface business inet static
-address <business address>
-gateway <business gateway>
-netmask <business netmask>
+    iface business inet static
+    address <business address>
+    gateway <business gateway>
+    netmask <business netmask>
 
-iface home inet static
-address <home address>
-gateway <home gateway>
-netmask <home netmask>
+    iface home inet static
+    address <home address>
+    gateway <home gateway>
+    netmask <home netmask>
 
------------------------------------------------------------------- 
-// Hit ^X to save your changes, and yes, and then enter
-
-// Restart the pi and wait for it to automatically startup Midori to
-// the correct URl now
-$ sudo reboot
+Hit ^X to save your changes, and yes, and then enter
+Restart the pi and wait for it to automatically startup 
+Midori to the correct URl now
