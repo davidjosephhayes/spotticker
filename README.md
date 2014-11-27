@@ -18,7 +18,7 @@ Download the latest 'spotticker' repo from https://github.com/davidjosephhayes/s
 
     $ git clone https://github.com/davidjosephhayes/spotticker
 
-// Copy the contents from 'spotticker' and paste them into the home drive and then remove the 'spotticker' folder to tidy up the home folder
+Copy the contents from 'spotticker' and paste them into the home drive and then remove the 'spotticker' folder to tidy up the home folder
     
     $ cp /spotticker* /home/pi
     $ rm /spotticker -rf
