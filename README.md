@@ -27,7 +27,7 @@ Install your updates
     $ cp /spotticker* /home/pi
     $ rm /spotticker -rf
 
-Disable the Raspberry Pi from going to sleep
+Disable the Raspberry Pi from going to sleep (This currently isn't working and needs a different solution)
 
     $ cd /etc/lightdm
     $ sudo nano lightdm.conf
