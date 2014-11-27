@@ -9,7 +9,7 @@ module.exports = {
 	todisplay: ['g','toz','dwt'], // weights to diplay g,toz,dwt
 	screenupdateinterval: 5, // lengh of time between updating screen and rotating through prices
 	
-	logofile: 'images/companylogo.png', // url for company logo file relative to the public folder
+	logofile: 'images/companylogo.png', // url for company logo file
 	displaylogoinupdate: true, // display logo in 
 	
 	gconvert: { // conversion from grams to other weight/mass measurements
