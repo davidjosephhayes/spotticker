@@ -13,12 +13,8 @@ Raspberry Pi Setup:
 Install your updates
 
     $ sudo apt-get update && sudo apt-get upgrade
-
-// Download the latest 'spotticker' repo from
-
-// https://github.com/davidjosephhayes/spotticker into your home
-
-// folder (/home/pi)
+    
+Download the latest 'spotticker' repo from https://github.com/davidjosephhayes/spotticker into your home folder (/home/pi)
 
     $ git clone https://github.com/davidjosephhayes/spotticker
 
