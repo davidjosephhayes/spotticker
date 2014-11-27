@@ -18,7 +18,8 @@ Download the latest 'spotticker' repo from https://github.com/davidjosephhayes/s
 
     $ git clone https://github.com/davidjosephhayes/spotticker
 
-Let's disable the Raspberry Pi from going to sleep. My work around is done by installing the X Window System and then updating a file that affects the environment. 
+<h3>Disable Pi screen from going to blank</h3>
+My work around is done by installing the X Window System and then updating a file that affects the environment. 
 
     $ sudo apt-get install x11-xserver-utils install
 
@@ -39,12 +40,22 @@ to
     #
     xserver-command = X -s 0 -dpms #Took out the comment
 
-by ommitting the '#' that comments it out.
+by ommitting the '#' that comments it out. Next, reboot the system and log in with your credentials
 
-Next up, let's disable the mouse from appearing on Boot by installing the program 'unclutter'
+    $ sudo reboot
+
+<h3>(Work in Progress) Automatically boot into X Window System</h3>
+
+    $ No Idea yet :'(
+
+Currently, we'll have to log in once when the pi is turned on and it will (in theory) work forever. That being said, this step needs to be researched still.
+
+<h3>Disable mouse appearance on boot</h3>
+Next up, let's disable the mouse from appearing on Boot by installing the program 'unclutter'.
 
     $ sudo apt-get install unclutter
 
+<h3>Enabling Node.js to start on boot</h3>
 The 'spotticker' app depends on the Node.js. Let's have Node run at boot by having it autostart. Navigate to the /etc directory, opening 'rc.local', and adding some lines. Colors will change in the nano editor if done correctly.
 
     $ cd /etc/
@@ -54,6 +65,7 @@ Add the following lines before the 'exit 0' text
 
     $ su pi -c 'node /home/pi/spotticker/index.js < /dev/null &'
 
+<h3>Midori Browser startup on boot</h3>
 Now that Node.js is automatically starting up on boot, we'll need our browser to direct itself to a preconfigured page in the 'index.js' file. Let's autostart Midori and have it navigate to that specific URL. First, navigate to the 'autostart' file and open it:
 
     $ cd /etc/xdg/lxsession/LXDE
@@ -157,5 +169,8 @@ Now navigate to /etc/network/ and sudo nano interfaces and edit the code to make
     netmask <home netmask>
 
 Hit ^X to save your changes, and yes, and then enter
-Restart the pi and wait for it to automatically startup 
-Midori to the correct URl now
+
+<h2>That's it!</h2>
+Let's do a reboot of the system:
+
+    $sudo reboot
