@@ -183,6 +183,6 @@ Now navigate to /etc/network/ and sudo nano interfaces and edit the code to make
 Hit ^X to save your changes, and yes, and then enter
 
 <h2>That's it!</h2>
-Let's do a reboot of the system:
+Let's reboot your Raspberry Pi:
 
-    $sudo reboot
+    $ sudo reboot
