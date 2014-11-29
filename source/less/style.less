@@ -37,7 +37,7 @@ h3 {
 		position: fixed;
 		top: 50%;
 		left: 50%;
-		transform: translate(-50%,-50%);
+		.transform(translate(-50%,-50%));
 		z-index: 101;
 	}
 }
@@ -64,7 +64,7 @@ h3 {
 		width: 20%;
 		height: 20%;
 		background: @logobackground;
-		transform: translate(-50%,0);
+		.transform(translate(-50%,0));
 		border-color: @logoborder;
 		z-index: 75;
 		padding: 2rem;
@@ -103,4 +103,13 @@ h3 {
 		top: 55%;
 		left: 50%;
 	}
+}
+
+// mixins
+.transform(@string){
+	-webkit-transform: @string;
+	-moz-transform: @string;
+	-ms-transform: @string;
+	-o-transform: @string;
+	transform: @string;
 }
