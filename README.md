@@ -44,12 +44,6 @@ by ommitting the '#' that comments it out. Next, reboot the system and log in wi
 
     $ sudo reboot
 
-<h3>(Work in Progress) Automatically boot into X Window System</h3>
-
-    $ No Idea yet :'(
-
-Currently, we'll have to log in once when the pi is turned on and it will (in theory) work forever. That being said, this step needs to be researched still.
-
 <h3>Disable mouse appearance on boot</h3>
 Next up, let's disable the mouse from appearing on Boot by installing the program 'unclutter'.
 
@@ -72,9 +66,29 @@ Add the final line beginning with '@unclutter' to this file.
     
 Be sure to save by pressing ^X. 
 
+<h3>Midori Browser startup on boot</h3>
+Like the previous instruction with the 'unclutter' program, we'll need Midori to automatically start as well. Let's autostart Midori and have it navigate to that specific URL. First, navigate to the 'autostart' file and open it:
+
+    $ cd /etc/xdg/lxsession/LXDE
+    $ sudo nano autostart
+
+Add the lines that tell the Pi to wait for 5 seconds, and then to start the Midori browser. When completed, the 'autostart' file should look like the following:
+
+    @lxpanel --profile LXDE
+    @pcmanfm --desktop --profile LXDE
+    @xscreensaver -no-splash
+    @xset s off
+    @xset -dpms
+    @xset s noblank
+    @unclutter -idle 0.1 -root
+    sleep 5
+    @midori -e Fullscreen -a http://localhost:1337
+
+When you're finished, click ^X, Y, and hit Enter to save your changes.
+
 
 <h3>Enabling Node.js to start on boot</h3>
-The 'spotticker' app depends on the Node.js. Let's have Node run at boot by having it autostart. Navigate to the /etc directory, opening 'rc.local', and adding some lines. Colors will change in the nano editor if done correctly.
+The 'spotticker' app depends on the Node.js. Let's have Node run at boot by having it automatically start. This file is in a different location than where we added the Midori and Unclutter actions.
 
     $ cd /etc/
     $ sudo nano rc.local
@@ -82,26 +96,6 @@ The 'spotticker' app depends on the Node.js. Let's have Node run at boot by havi
 Add the following lines before the 'exit 0' text
 
     $ su pi -c 'node /home/pi/spotticker/index.js < /dev/null &'
-
-<h3>Midori Browser startup on boot</h3>
-Now that Node.js is automatically starting up on boot, we'll need our browser to direct itself to a preconfigured page in the 'index.js' file. Let's autostart Midori and have it navigate to that specific URL. First, navigate to the 'autostart' file and open it:
-
-    $ cd /etc/xdg/lxsession/LXDE
-    $ sudo nano autostart
-
-Second, comment out the first three lines, and add these other lines. When completed, it should look like the following:
-
-    #@lxpanel --profile LXDE
-    #@pcmanfm --desktop --profile LXDE
-    #@xscreensaver -no-splash
-    @xset s off
-    @xset -dpms
-    @xset s noblank
-    @unclutter -idle 0.1 -root
-    sleep 60
-    @midori -e Fullscreen -a http://localhost:1337
-
-When you're finished, click ^X, Y, and hit Enter to save your changes
 
 <h3>Wifi Configuration</h3>
 
