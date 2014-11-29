@@ -54,6 +54,24 @@ Currently, we'll have to log in once when the pi is turned on and it will (in th
 Next up, let's disable the mouse from appearing on Boot by installing the program 'unclutter'.
 
     $ sudo apt-get install unclutter
+    
+And then navigating to the LXDE folder to make a line change so the Raspberry Pi knows to initiate the program on boot:
+    
+    $ cd /etc/xdg/lxsession/LXDE
+    $ sudo nano autostart
+    
+Add the final line beginning with '@unclutter' to this file. 
+
+    @lxpanel --profile LXDE
+    @pcmanfm --desktop --profile LXDE
+    @xscreensaver -no-splash
+    @xset s off
+    @xset -dpms
+    @xset s noblank
+    @unclutter -idle 0.1 -root #Line Added to initiate the 'unclutter' action
+    
+Be sure to save by pressing ^X. 
+
 
 <h3>Enabling Node.js to start on boot</h3>
 The 'spotticker' app depends on the Node.js. Let's have Node run at boot by having it autostart. Navigate to the /etc directory, opening 'rc.local', and adding some lines. Colors will change in the nano editor if done correctly.
