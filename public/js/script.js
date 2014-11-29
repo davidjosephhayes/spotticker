@@ -31,7 +31,7 @@ function setupUpdate() {
 
 var cw = 0;
 function updateView(){
-	// adrian start
+
 	var currentweight = settings.todisplay[cw];
 	
 	$('.currentWeight').text(currentweight);
@@ -45,13 +45,13 @@ function updateView(){
 	var u = new Date(prices.updated);
 	var hours = u.getHours();
 	var am = hours%12==hours ? 'am' : 'pm';
-	hours = hours==0 ? 12 : hours;
+	hours = hours==0 ? 12 : hours%12;	
 	var minutes = u.getMinutes(); 
+	minutes = minutes<10 ? '0'+minutes : minutes;
 	var day = u.getDate();
 	var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
 	var month = monthNames[u.getMonth()].substr(0,3);
 	$('.lastUpdated').html(hours + ':' + minutes + ' ' + am + ' - ' + day + ' ' + month);
 	
 	$('.loading-container').hide();
-	// adrian end
 }
