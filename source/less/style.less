@@ -1,59 +1,106 @@
+html, body { 
+	width: 100%;
+	height: 100%;
+	font-size: 32px;
+}
 body {
-	background: #000;
+	background: @background;
 	color: #fff;
 	font-size: 32px;
-	h1 {
-		color: #f1c40f;
-		font-size: 5rem;
-	}
-	h2 {
-		font-size: 10rem;
-	}
-	.loading-container {
+}
+h1, h2, h3 {
+	margin: 1.25rem 0;
+}
+h1 {
+	color: #f1c40f;
+	font-size: 2.5rem;
+	line-height: 2.5rem;
+}
+h2 {
+	font-size: 5rem;
+	line-height: 5rem;
+}
+h3 {
+	font-size: 1rem;
+	line-height: 1rem;
+}
+.loading-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: @background;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+	.loading-icon {
+		color: #fff;
 		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+		z-index: 101;
+	}
+}
+.loaded-container {
+	#updatesBox, #logoBox, #goldBox, #silverBox, #platinumBox, #palladiumBox {
+		position: fixed;
+		border-style: solid;
+		border-width: 0.2rem;
+		padding: 0 1rem;
+		vertical-align: middle;
+	}
+	#updatesBox {
+		background: @updatesbackground;
+		border-color: @updatesborder;
+		width: 100%;
+		height: 10%;
 		top: 0;
 		left: 0;
-		background: #000;
-		width: 100%;
-		height: 100%;
-		z-index: 100;
-		.loading-icon {
-			color: #fff;
-			position: fixed;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%,-50%);
-			z-index: 101;
-		}
+		z-index: 50;
 	}
-	.loaded-container {
-		#wt_update {
-			position: fixed;
+	#logoBox {
+		bottom: 0;
+		left: 50%;
+		width: 20%;
+		height: 20%;
+		background: @logobackground;
+		transform: translate(-50%,0);
+		border-color: @logoborder;
+		z-index: 75;
+		padding: 2rem;
+		#logo {
+			background:  url(@logofile) no-repeat scroll center center;
+			background-size: contain;
 			width: 100%;
 			height: 100%;
-			z-index: 50;
-			top: 0;
 		}
-		#topLeft, #topRight, #bottomLeft, #bottomRight {
-			position: fixed;
-			width: 50%;
-			height: 45%;
-			z-index: 50;
-			top: 10%;
-			left: 0;
-			border: solid 0.2rem purple;
-		}
-		#topLeft {
-		}
-		#topRight {
-			left: 50%;
-		}
-		#bottomLeft {
-			top: 55%;
-		}
-		#bottomRight {
-			top: 55%;
-			left: 50%;
-		}
+	}
+	#goldBox, #silverBox, #platinumBox, #palladiumBox {
+		position: fixed;
+		width: 50%;
+		height: 45%;
+		z-index: 50;
+		top: 10%;
+		left: 0;
+	}
+	#goldBox {
+		background: @goldbackground;
+		border-color: @goldborder;
+	}
+	#silverBox {
+		background: @silverbackground;
+		border-color: @silverborder;
+		left: 50%;
+	}
+	#platinumBox {
+		background: @platinumbackground;
+		border-color: @platinumborder;
+		top: 55%;
+	}
+	#palladiumBox {
+		background: @palladiumbackground;
+		border-color: @palladiumborder;
+		top: 55%;
+		left: 50%;
 	}
 }

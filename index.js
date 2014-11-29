@@ -1,17 +1,27 @@
+// include modules
 var	express = require('express'),
 	app = express(),
+	fs = require('fs'),
 	io = require('socket.io'),
 	request = require('request'),
 	path = require('path'),
-	less = require('less-middleware'),
-	stsettings = require('./stsettings');
+	less = require('less-middleware');
+	
+// include settings
+var defaultsettingslocation = path.join(__dirname, 'stsettings.dist.js');
+var settingslocation = path.join(__dirname, 'stsettings.js');
+if (!fs.existsSync(settingslocation)) { // copy distribution settings if none are specified
+	var defaultsettingsdata = fs.readFileSync(defaultsettingslocation).toString();
+	fs.writeFileSync(settingslocation,defaultsettingsdata);
+}
+stsettings = fs.existsSync(settingslocation) ? require('./stsettings') : require('./stsettings.dist');
 	
 // setup basics
 var settings = JSON.parse(JSON.stringify(stsettings)); //console.log(settings);
 var prices = JSON.parse(JSON.stringify(settings.pricesdefault)); // console.log(prices);
 	
 // serve static content
-app.use(less(path.join(__dirname, 'source', 'less'), {
+app.use(less(path.join(__dirname,'source','less'),{
 	dest: path.join(__dirname, 'public'),
 	options: {
 		compiler: {
@@ -20,8 +30,20 @@ app.use(less(path.join(__dirname, 'source', 'less'), {
 	},
 	preprocess: {
 		path: function(pathname, req) {
-			return pathname.replace('/css/', '/');
+			return pathname.replace('/css/','/'); 
 		},
+		less : function(src, req){
+			var varString = '';
+			for (var key in settings.styles.files){
+				if (!settings.styles.files.hasOwnProperty(key)) continue;
+				varString += '@' + key + ':~"../' + settings.styles.files[key] + '";';
+			}
+			for (var key in settings.styles.colors){
+				if (!settings.styles.colors.hasOwnProperty(key)) continue;
+				varString += '@' + key + ':' + settings.styles.colors[key] + ';';
+			}
+			return varString + src;
+		}
 	},
 	debug: settings.testmode,
 	force: settings.testmode,

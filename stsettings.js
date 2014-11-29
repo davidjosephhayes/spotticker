@@ -7,10 +7,38 @@ module.exports = {
 	pricesupdateinterval: 60, // in minutes
 	
 	todisplay: ['g','toz','dwt'], // weights to diplay g,toz,dwt
-	screenupdateinterval: 5, // lengh of time between updating screen and rotating through prices
-	
-	logofile: 'images/companylogo.png', // url for company logo file relative to the public folder
 	displaylogoinupdate: true, // display logo in 
+	screenupdateinterval: 5, // lengh of time between updating screen and rotating through prices
+
+	styles: {
+		
+		files: {
+			logofile: 'images/companylogo.png', // url for company logo file
+		},
+		
+		colors: {
+		
+			background: 'pink',
+			
+			updatesbackground: 'teal',
+			updatesborder: 'solid 0.2rem yellow',
+			
+			logobackground: 'black',
+			logoborder: 'solid 0.2rem gold',
+			
+			goldbackground: 'gray', 
+			goldborder: 'solid 0.2rem gold',
+
+			silverbackground: 'brown', 
+			silverborder: 'solid 0.2rem silver',
+			
+			platinumbackground: 'orange', 
+			platinumborder: 'solid 0.2rem green',
+			
+			palladiumbackground: 'red', 
+			palladiumborder: 'solid 0.2rem blue',
+		},
+	},
 	
 	gconvert: { // conversion from grams to other weight/mass measurements
 		'g': 1,

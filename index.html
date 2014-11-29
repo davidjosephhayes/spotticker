@@ -11,89 +11,38 @@
 		<div class="loading-container">
 			<div class="loading-icon"><i class="fa fa-spinner fa-spin fa-4x"></i></div>
 		</div>
-		<div class="loaded-container container-fluid">
+		<div class="loaded-container">
 			<!-- adrian start -->
-			<div id="topLeft" class="col-xs-6">
+			<div id="updatesBox">
+				<div class="col-xs-6">
+					<h3>Weight: <span class="currentWeight"></span></h3>
+				</div>
+				<div class="col-xs-6 text-right">
+					<h3>Last Update: <span class="lastUpdated"></span></h3>
+				</div>
+			</div>
+			<div id="logoBox"><div id="logo"></div></div>
+			<div id="goldBox">
 				<h1>Gold</h1>
 				<h2 class="goldPrice text-center"></h2>
 			</div>
-			<div id="topRight" class="col-xs-6">
+			<div id="silverBox">
 				<h1>Silver</h1>
 				<h2 class="silverPrice text-center"></h2>	
 			</div>
-			<div id="bottomLeft" class="col-xs-6">
+			<div id="platinumBox">
 				<h1>Platinum</h1>
 				<h2 class="platinumPrice text-center"></h2>
 			</div>
-			<div id="bottomRight" class="col-xs-6">
+			<div id="palladiumBox">
 				<h1>Palladium</h1>
 				<h2 class="palladiumPrice text-center"></h2>
-			</div>
-			<div id="wt_update" class="row">
-				<div class="col-xs-6">
-					Weight: <span class="currentWeight"></span>
-				</div>
-				<div class="col-xs-6 text-right">
-					Last Update: <span class="lastUpdated"></span>
-				</div>
 			</div>
 			<!-- adrian end -->
 		</div>
 		<script src="socket.io/socket.io.js"></script>
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-		<script>
-			var socket = io.connect(window.location.protocol+'//'+window.location.hostname);
-			
-			var settings;
-			socket.on('settings',function(data){
-				settings = data;
-				if (settings.todisplay.length<=0) settings.todisplay = ['g'];
-				setupUpdate();
-			});
-			
-			var prices;
-			socket.on('pricesupdate',function(data){
-				prices = data;
-				setupUpdate();
-			});
-			
-			var updateintv;
-			function setupUpdate() {
-				if (typeof updateintv != 'undefined' || typeof settings == 'undefined' || typeof prices == 'undefined') return;
-				updateintv = setInterval(function(){
-					//~ console.log(settings);
-					//~ console.log(prices);
-					updateView();
-				},settings.screenupdateinterval*1000);
-			}
-			
-			var cw = 0;
-			function updateView(){
-				// adrian start
-				var currentweight = settings.todisplay[cw];
-				
-				$('.currentWeight').text(currentweight);
-				$('.goldPrice').html('$'+prices[currentweight].gold.toFixed(2));
-				$('.silverPrice').html('$'+prices[currentweight].silver.toFixed(2));
-				$('.palladiumPrice').html('$'+prices[currentweight].palladium.toFixed(2));
-				$('.platinumPrice').html('$'+prices[currentweight].platinum.toFixed(2));
-				
-				cw = (cw+1)%settings.todisplay.length;
-				
-				var u = new Date(prices.updated);
-				var hours = u.getHours();
-				var am = hours%12==hours ? 'am' : 'pm';
-				hours = hours==0 ? 12 : hours;
-				var minutes = u.getMinutes(); 
-				var day = u.getDate();
-				var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
-				var month = monthNames[u.getMonth()].substr(0,3);
-				$('.lastUpdated').html(hours + ':' + minutes + ' ' + am + ' - ' + day + ' ' + month);
-				
-				$('.loading-container').hide();
-				// adrian end
-			}
-		</script>
+		<script src="js/script.js"></script>
     </body>
 </html>
