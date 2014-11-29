@@ -19,7 +19,7 @@ Download the latest 'spotticker' repo from https://github.com/davidjosephhayes/s
     $ git clone https://github.com/davidjosephhayes/spotticker
 
 <h3>Disable Pi screen from going to blank</h3>
-My work around is done by installing the X Window System and then updating a file that affects the environment. 
+My work around involves installing the X Window System and then updating a file that affects the environment. 
 
     $ sudo apt-get install x11-xserver-utils install
 
