@@ -45,6 +45,32 @@ to:
 by ommitting the '#' that comments it out. Next, reboot the system and log in with your credentials:
 
     $ sudo reboot
+    
+Final thing is to disable the 'Display Power Management Signalling' and screensaver from the 'autostart' file in the LXDE folder. 
+
+    $ cd /etc/xdg/lxsession/LXDE
+    $ sudo nano autostart
+    
+This will show the following text: 
+
+    @lxpanel --profile LXDE
+    @pcmanfm --desktop --profile LXDE
+    @xscreensaver -no-splash
+
+Add the following lines inside the 'autostart' file:
+
+    @xset s off
+    @xset -dpms
+    @xset s noblank
+    
+And save the 'autostart' file now that its contents contain the following:
+
+    @lxpanel --profile LXDE
+    @pcmanfm --desktop --profile LXDE
+    @xscreensaver -no-splash
+    @xset s off
+    @xset -dpms
+    @xset s noblank
 
 <h3>Disable mouse appearance on boot</h3>
 Next up, let's disable the mouse from appearing on Boot by installing the program 'unclutter':
