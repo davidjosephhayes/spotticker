@@ -10,7 +10,7 @@ http://www.xmlcharts.com/precious-metals.html
 
 <h2>Raspberry Pi Setup:</h2>
 
-The only preconditions for this setup is that you currently have a Raspberry Pi model B or above, and have Raspbian Debian Wheezy installed. If not, here is the download link for the SD Card images: http://www.raspberrypi.org/downloads/ 
+The only preconditions for this setup is that you currently have a Raspberry Pi model B or above with internet access, and have Raspbian Debian Wheezy installed. If not, here is the download link for the SD Card images: http://www.raspberrypi.org/downloads/ 
 
 First things first, install your updates:
 
