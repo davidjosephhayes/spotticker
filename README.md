@@ -7,8 +7,8 @@ We designed this to be used on a Raspberry Pi, so instructions for our setup of 
 
 http://www.xmlcharts.com/precious-metals.html
 
-Raspberry Pi Setup:
--
+
+<h2>Raspberry Pi Setup:</h2>
 
 Install your updates
 
@@ -54,7 +54,7 @@ And then navigating to the LXDE folder to make a line change so the Raspberry Pi
     $ cd /etc/xdg/lxsession/LXDE
     $ sudo nano autostart
     
-Add the final line beginning with '@unclutter' to this file. 
+Add the final line '@unclutter -idle 0.1 -root' to the end of the file.
 
     @lxpanel --profile LXDE
     @pcmanfm --desktop --profile LXDE
@@ -62,12 +62,12 @@ Add the final line beginning with '@unclutter' to this file.
     @xset s off
     @xset -dpms
     @xset s noblank
-    @unclutter -idle 0.1 -root #Line Added to initiate the 'unclutter' action
+    @unclutter -idle 0.1 -root
     
 Be sure to save by pressing ^X. 
 
 <h3>Midori Browser startup on boot</h3>
-Like the previous instruction with the 'unclutter' program, we'll need Midori to automatically start as well. Let's autostart Midori and have it navigate to that specific URL. First, navigate to the 'autostart' file and open it:
+Like the previous instruction with the 'unclutter' program, we'll need Midori to automatically start as well. Let's autostart Midori and have it navigate to 'https://localhost:1337'. First, navigate to the 'autostart' file and open it:
 
     $ cd /etc/xdg/lxsession/LXDE
     $ sudo nano autostart
@@ -84,7 +84,7 @@ Add the lines that tell the Pi to wait for 5 seconds, and then to start the Mido
     sleep 5
     @midori -e Fullscreen -a http://localhost:1337
 
-When you're finished, click ^X, Y, and hit Enter to save your changes.
+Be sure to save your changes!
 
 
 <h3>Enabling Node.js to start on boot</h3>
@@ -99,7 +99,7 @@ Add the following lines before the 'exit 0' text
 
 <h3>Wifi Configuration</h3>
 
-The Wifi can be configured one of two ways. If you have only one network you will be using, read the the next few steps under 'Single Wifi Configuration' Otherwises, jump to 'Multiple Wifi Configuration'
+We recommend wireless communication between the Raspberry Pi and your network if you have the Pi in an area where a Ethernet cable can't reach. The Wifi can be configured one of two ways. If you have only one network you will be using, read the the next few steps under 'Single Wifi Configuration' Otherwises, jump to 'Multiple Wifi Configuration'
 
 <h4>Single Wifi Configuration:</h4> 
 
