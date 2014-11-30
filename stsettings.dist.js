@@ -18,7 +18,7 @@ module.exports = {
 		
 		colors: {
 		
-			background: 'pink',
+			background: 'black',
 			
 			updatesbackground: 'teal',
 			updatesborder: 'yellow',
