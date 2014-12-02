@@ -59,8 +59,8 @@ app.get('/',function(req,res){
 // setup server
 var server = app.listen(1337,function(){
 	if (stsettings.launchmidori) {
-		//~ var midori = spawn('midori',['-e Fullscreen','-a http://localhost:1337']);
-		var midori = spawn('chromium-browser',['--kiosk','http://localhost:1337']);
+		var midori = spawn('midori',['-e Fullscreen','-a http://localhost:1337']);
+		//~ var midori = spawn('chromium-browser',['--kiosk','http://localhost:1337']);
 	}
 });
 var socket = io.listen(server);
