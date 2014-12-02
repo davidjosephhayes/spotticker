@@ -44,8 +44,9 @@ function updateView(){
 	
 	var u = new Date(prices.updated);
 	var hours = u.getHours();
-	var am = hours%12==hours ? 'am' : 'pm';
-	hours = hours==0 ? 12 : hours%12;	
+	var regularhours = hours%12;
+	var am = regularhours==hours ? 'am' : 'pm';
+	hours = regularhours==0 ? 12 : regularhours;	
 	var minutes = u.getMinutes(); 
 	minutes = minutes<10 ? '0'+minutes : minutes;
 	var day = u.getDate();
