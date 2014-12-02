@@ -18,8 +18,8 @@ if (!fs.existsSync(settingslocation)) { // copy distribution settings if none ar
 stsettings = fs.existsSync(settingslocation) ? require('./stsettings') : require('./stsettings.dist');
 	
 // setup basics
-var settings = JSON.parse(JSON.stringify(stsettings)); //console.log(settings);
-var prices = JSON.parse(JSON.stringify(settings.pricesdefault)); // console.log(prices);
+var settings = JSON.parse(JSON.stringify(stsettings));
+var prices = JSON.parse(JSON.stringify(settings.pricesdefault));
 	
 // serve static content
 app.use(less(path.join(__dirname,'source','less'),{
@@ -59,7 +59,7 @@ app.get('/',function(req,res){
 // setup server
 var server = app.listen(1337,function(){
 	if (stsettings.launchmidori) {
-		var midori = spawn('midori',['-e Fullscreen','-a http://localhost:1337']);
+		var midori = spawn('midori',['-e','Fullscreen','-a','http://localhost:1337']);
 		//~ var midori = spawn('chromium-browser',['--kiosk','http://localhost:1337']);
 	}
 });
