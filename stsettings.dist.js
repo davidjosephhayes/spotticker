@@ -4,7 +4,10 @@ module.exports = {
 	
 	testmode: true,
 	
-	pricesupdateinterval: 60, // in minutes
+	url: 'http://kearneycoincenter.com/index.php?option=com_kccprice&task=getPrices', // update url
+	code: '', // prices code
+	
+	pricesupdateinterval: 1, // in minutes
 	
 	todisplay: ['g','toz','dwt'], // weights to diplay g,toz,dwt
 	displaylogoinupdate: true, // display logo in 

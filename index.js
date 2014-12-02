@@ -79,23 +79,28 @@ function updateinterval() {
 		};
 		updateprices(newprices);
 	} else {
-		request.get('http://www.xmlcharts.com/cache/precious-metals.php?format=json&currency=usd', function(error,response,body){
+		var url = settings.url;
+		url += '&code='+encodeURIComponent(settings.code); // console.log(url);
+		request.get(url, function(error,response,body){
 			if (error || response.statusCode != 200) return false;
 			try {
 				var newprices = JSON.parse(response.body);
+				if ('error' in newprices) {
+					throw new Error(newprices.error);
+					return false;
+				}
 				updateprices(newprices);						
 			} catch(e) { console.log(e); }
 		});
 	}
 	
 	function updateprices(newprices) {
-		prices.updated = new Date();
+		prices.updated = new Date(newprices.updated*1000);
 		for (var i=0; i<settings.todisplay.length; i++) {
 			var meas = settings.todisplay[i];
-			var obj = prices[meas];
-			for (var j in obj) {
-				if (!obj.hasOwnProperty(j)) continue;
-				obj[j] = newprices[j]*settings.gconvert[meas]; 
+			for (var j in prices[meas]) {
+				if (!prices[meas].hasOwnProperty(j)) continue;
+				prices[meas][j] = newprices.prices[j]*settings.gconvert[meas]; 
 			}
 		}
 		socket.emit('pricesupdate',prices);
