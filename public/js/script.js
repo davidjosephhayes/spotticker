@@ -1,5 +1,5 @@
 jQuery(function($){
-	var resize = function(){ $('html,body').css('font-size',window.innerHeight/40); };
+	var resize = function(){ $('html,body').css('font-size',window.innerHeight/30); };
 	$(window).resize(resize);
 	resize();
 });
