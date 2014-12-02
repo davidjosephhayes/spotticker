@@ -10,8 +10,27 @@ module.exports = {
 	pricesupdateinterval: 60, // in minutes
 	
 	todisplay: ['g','toz','dwt'], // weights to diplay g,toz,dwt
-	displaylogoinupdate: true, // display logo in 
-	screenupdateinterval: 5, // lengh of time between updating screen and rotating through prices
+	screenupdateinterval: 5, // lengh of time between updating screen and rotating through prices in seconds
+	
+	pricemodifiers: { // amount to modify price (useful for adding a profit margin or getting the bid price closer to ask)
+		gold: {
+			fixed: 0,
+			ratio: 1,
+		},
+		silver: {
+			fixed: 0,
+			ratio: 1,
+		},
+		platinum: {
+			fixed: 0,
+			ratio: 1,
+		},
+		palladium: {
+			fixed: 0,
+			ratio: 1,
+		},
+	},
+		
 
 	styles: {
 		
@@ -46,6 +65,8 @@ module.exports = {
 		},
 	},
 	
+	
+	// no edit below here 
 	gconvert: { // conversion from grams to other weight/mass measurements
 		'g': 1,
 		'toz': 31.1034768,

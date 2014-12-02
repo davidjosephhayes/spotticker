@@ -60,7 +60,7 @@ var server = app.listen(1337);
 var socket = io.listen(server);
 
 // creating a new websocket
-socket.sockets.on('connection',function(socket){ // console.log(socket);
+socket.sockets.on('connection',function(socket){
 	socket.emit('settings',settings);
 	socket.emit('pricesupdate',prices);
 });
@@ -75,7 +75,7 @@ function updateinterval() {
 		updateprices(newprices);
 	} else {
 		var url = settings.url;
-		url += '&code='+encodeURIComponent(settings.code); // console.log(url);
+		url += '&code='+encodeURIComponent(settings.code);
 		request.get(url, function(error,response,body){
 			if (error || response.statusCode != 200) return false;
 			try {
@@ -89,13 +89,13 @@ function updateinterval() {
 		});
 	}
 	
-	function updateprices(newprices) {
+	function updateprices(newprices) { 
 		prices.updated = new Date(newprices.updated*1000);
 		for (var i=0; i<settings.todisplay.length; i++) {
 			var meas = settings.todisplay[i];
 			for (var j in prices[meas]) {
 				if (!prices[meas].hasOwnProperty(j)) continue;
-				prices[meas][j] = newprices.prices[j]*settings.gconvert[meas]; 
+				prices[meas][j] = (newprices.prices[j]*settings.gconvert[meas]+settings.pricemodifiers[j].fixed)*settings.pricemodifiers[j].ratio; 
 			}
 		}
 		socket.emit('pricesupdate',prices);
