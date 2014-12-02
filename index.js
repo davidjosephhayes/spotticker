@@ -71,12 +71,7 @@ var updateintervalintv = setInterval(updateinterval,settings.pricesupdateinterva
 function updateinterval() {
 	
 	if (settings.testmode) {
-		var newprices = {
-			"gold": 38.74486 * (0.75 + Math.random()*0.5),
-			"palladium": 25.33479 * (0.75 + Math.random()*0.5),
-			"platinum": 39.54541 * (0.75 + Math.random()*0.5),
-			"silver": 0.53113 * (0.75 + Math.random()*0.5),
-		};
+		var newprices = {"updated":1417533961,"updatedreadable":"Tue, 02 Dec 2014 15:26:01 +0000","prices":{"gold":38.47479,"palladium":25.72059,"platinum":39.06315,"silver":0.52599}};
 		updateprices(newprices);
 	} else {
 		var url = settings.url;

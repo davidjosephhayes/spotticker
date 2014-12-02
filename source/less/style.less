@@ -12,7 +12,6 @@ h1, h2, h3 {
 	margin: 1.25rem 0;
 }
 h1 {
-	color: #f1c40f;
 	font-size: 2.5rem;
 	line-height: 2.5rem;
 }
@@ -32,6 +31,14 @@ h3 {
 	width: 100%;
 	height: 100%;
 	z-index: 100;
+	.bbs-branding {
+		position: fixed;
+		top: 0;
+		left: 0;
+		background: #000;
+		padding: 0.25rem;
+		height: 5%;
+	}
 	.loading-icon {
 		color: #fff;
 		position: fixed;
@@ -48,23 +55,19 @@ h3 {
 		border-width: 0.2rem;
 		padding: 0 1rem;
 		vertical-align: middle;
-	}
-	#updatesBox {
-		background: @updatesbackground;
-		border-color: @updatesborder;
-		width: 100%;
-		height: 15%;
-		top: 0;
-		left: 0;
-		z-index: 50;
+		h1 {
+			color: @headingscolor;
+		}
+		h2, h3 {
+			color: @pricescolor;
+		}
 	}
 	#logoBox {
-		top: 50%;
-		left: 50%;
+		top: 0;
+		left: 0;
 		width: 20%;
 		height: 15%;
 		background: @logobackground;
-		.transform(translate(-50%,50%));
 		border-color: @logoborder;
 		z-index: 75;
 		padding: 0.25rem;
@@ -75,6 +78,15 @@ h3 {
 			width: 100%;
 			height: 100%;
 		}
+	}
+	#updatesBox {
+		background: @updatesbackground;
+		border-color: @updatesborder;
+		width: 80%;
+		height: 15%;
+		top: 0;
+		left: 20%;
+		z-index: 50;
 	}
 	#goldBox, #silverBox, #platinumBox, #palladiumBox {
 		position: fixed;
@@ -92,9 +104,6 @@ h3 {
 		background: @silverbackground;
 		border-color: @silverborder;
 		left: 50%;
-		h1 { 
-			text-align: right;
-		}
 	}
 	#platinumBox {
 		background: @platinumbackground;
@@ -106,9 +115,6 @@ h3 {
 		border-color: @palladiumborder;
 		top: 57.5%;
 		left: 50%;
-		h1 { 
-			text-align: right;
-		}
 	}
 }
 

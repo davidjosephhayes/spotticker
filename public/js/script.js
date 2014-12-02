@@ -51,7 +51,7 @@ function updateView(){
 	var day = u.getDate();
 	var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
 	var month = monthNames[u.getMonth()].substr(0,3);
-	$('.lastUpdated').html(hours + ':' + minutes + ' ' + am + ' - ' + day + ' ' + month);
+	$('.lastUpdated').html(hours + ':' + minutes + am + ' ' + month + ' ' + day);
 	
 	$('.loading-container').hide();
 }

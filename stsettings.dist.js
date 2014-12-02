@@ -7,7 +7,7 @@ module.exports = {
 	url: 'http://kearneycoincenter.com/index.php?option=com_kccprice&task=getPrices', // update url
 	code: '', // prices code
 	
-	pricesupdateinterval: 1, // in minutes
+	pricesupdateinterval: 60, // in minutes
 	
 	todisplay: ['g','toz','dwt'], // weights to diplay g,toz,dwt
 	displaylogoinupdate: true, // display logo in 
@@ -16,30 +16,33 @@ module.exports = {
 	styles: {
 		
 		files: {
-			logofile: 'images/companylogo.png', // url for company logo file
+			logofile: 'images/bbslogo.png', // url for company logo file
 		},
 		
 		colors: {
 		
 			background: 'black',
 			
-			updatesbackground: 'teal',
-			updatesborder: 'yellow',
+			updatesbackground: '#34495e',
+			updatesborder: '#2c3e50',
 			
-			logobackground: 'black',
-			logoborder: 'gold',
+			logobackground: '#2c3e50',
+			logoborder: '#2c3e50',
 			
-			goldbackground: 'gray', 
-			goldborder: 'gold',
+			goldbackground: '#34495e', 
+			goldborder: '#2c3e50',
 
-			silverbackground: 'brown', 
-			silverborder: 'silver',
+			silverbackground: '#34495e', 
+			silverborder: '#2c3e50',
 			
-			platinumbackground: 'orange', 
-			platinumborder: 'green',
+			platinumbackground: '#34495e', 
+			platinumborder: '#2c3e50',
 			
-			palladiumbackground: 'red', 
-			palladiumborder: 'blue',
+			palladiumbackground: '#34495e', 
+			palladiumborder: '#2c3e50',
+			
+			headingscolor: '#f1c40f',
+			pricescolor: '#ffffff',
 		},
 	},
 	
