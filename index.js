@@ -5,7 +5,8 @@ var	express = require('express'),
 	io = require('socket.io'),
 	request = require('request'),
 	path = require('path'),
-	less = require('less-middleware');
+	less = require('less-middleware'),
+	spawn = require('child_process').spawn;
 	
 // include settings
 var defaultsettingslocation = path.join(__dirname, 'stsettings.dist.js');
@@ -56,7 +57,12 @@ app.get('/',function(req,res){
 });
 
 // setup server
-var server = app.listen(1337);
+var server = app.listen(1337,function(){
+	if (stsettings.launchmidori) {
+		//~ var midori = spawn('midori',['-e Fullscreen','-a http://localhost:1337']);
+		var midori = spawn('chromium-browser',['--kiosk','http://localhost:1337']);
+	}
+});
 var socket = io.listen(server);
 
 // creating a new websocket

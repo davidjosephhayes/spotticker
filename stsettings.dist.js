@@ -12,6 +12,8 @@ module.exports = {
 	todisplay: ['g','toz','dwt'], // weights to diplay g,toz,dwt
 	screenupdateinterval: 5, // lengh of time between updating screen and rotating through prices in seconds
 	
+	launchmidori: false, // spawn midori in full screen at url after server is up
+	
 	pricemodifiers: { // amount to modify price (useful for adding a profit margin or getting the bid price closer to ask)
 		gold: {
 			fixed: 0,
@@ -31,7 +33,6 @@ module.exports = {
 		},
 	},
 		
-
 	styles: {
 		
 		files: {
