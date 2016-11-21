@@ -13,7 +13,8 @@ module.exports = {
 	screenupdateinterval: 5, // lengh of time between updating screen and rotating through prices in seconds
 	
 	launchmidori: false, // spawn midori in full screen at url after server is up
-	
+
+	showBid: false, // show the unmodified bid price as well as the modified price
 	pricemodifiers: { // amount to modify price (useful for adding a profit margin or getting the bid price closer to ask)
 		gold: {
 			fixed: 0,
